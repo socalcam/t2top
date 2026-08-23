@@ -1,0 +1,66 @@
+.TH T2TOP 1 "August 2026" "t2top 1.0.0" "User Commands"
+.SH NAME
+t2top \- hardware telemetry for Macs running Linux
+.SH SYNOPSIS
+.B t2top
+[\fIoptions\fR]
+.SH DESCRIPTION
+.B t2top
+is a dependency-free terminal dashboard for Intel Macs with the Apple T2
+security chip running Linux. It decodes the Apple SMC sensor wall (the
+four-character keys exposed by the
+.B applesmc
+driver) into named temperatures, and shows fans with their controller
+targets, battery health and cycle count, CPU per-core load and thermals,
+dual-GPU telemetry, memory, disk, and network \(em all from /sys and /proc,
+with no root, no configuration, and no libraries beyond libc.
+.PP
+On non-Mac hardware every panel degrades gracefully; the SMC wall simply
+reports that no applesmc device exists.
+.SH OPTIONS
+.TP
+.B \-\-once
+Render a single frame to stdout and exit.
+.TP
+.B \-\-list
+Plain-text dump of every discovered sensor, then exit.
+.TP
+.BI \-\-size " WxH"
+Override the frame size (useful with \-\-once).
+.TP
+.BI \-\-interval " MS"
+Sampling interval in milliseconds (default 500).
+.TP
+.B \-f, \-\-fahrenheit
+Display temperatures in Fahrenheit.
+.TP
+.B \-\-256
+Use 256-color output instead of 24-bit truecolor.
+.TP
+.B \-\-version
+Print the version and exit.
+.SH KEYS
+.TP
+.B q
+Quit.
+.TP
+.B p
+Pause sampling.
+.TP
+.B +/\-
+Faster / slower sampling.
+.TP
+.B f
+Toggle Celsius / Fahrenheit.
+.SH FILES
+Sensor sources include
+.IR /sys/class/hwmon ,
+.IR /sys/class/power_supply/BAT0 ,
+.IR /proc/stat ,
+and
+.IR /proc/net/wireless .
+.SH SEE ALSO
+.BR sensors (1),
+.BR btop (1)
+.SH AUTHOR
+Built for the t2linux community.
